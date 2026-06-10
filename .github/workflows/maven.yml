@@ -32,10 +32,10 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      - name: Verify settings.xml
+      - name: Verify setting.xml
         run: |
           ls -al $GITHUB_WORKSPACE
-          test -f $GITHUB_WORKSPACE/settings.xml && echo "settings.xml found"
+          test -f $GITHUB_WORKSPACE/setting.xml && echo "setting.xml found"
 
       - name: Build and analyze with SonarCloud
         env:
@@ -45,6 +45,6 @@ jobs:
 
       - name: Publish to GitHub Packages Apache Maven
         if: github.event_name == 'release'
-        run: mvn -B deploy -s $GITHUB_WORKSPACE/settings.xml
+        run: mvn -B deploy -s $GITHUB_WORKSPACE/setting.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
